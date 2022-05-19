@@ -10,3 +10,20 @@ public class WorkApplication {
 		SpringApplication.run(WorkApplication.class, args);
 	}
 }
+
+/* Run this application, open RestMan to test **POST** method
+
+Test input:
+
+  {
+    "userId": 3,
+    "username": "willfack",
+    "email": "willfack@kmail.net",
+    "password": "williamfack"
+  }
+
+  Headers:
+
+  Header:	content-type				Value:	application/json
+
+ */

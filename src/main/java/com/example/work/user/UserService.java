@@ -1,11 +1,29 @@
 package com.example.work.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
     public List<User> getUser() {
-        return List.of(new User(1, "username1", "email1@gmail.com", "password1"));
+        return userRepository.findAll();
+    }
+
+    public void addNewUser(User user) {
+        Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
+        if (userOptional.isPresent()) {
+            throw new IllegalStateException("email is already registered");
+        }
+        userRepository.save(user);
     }
 }
