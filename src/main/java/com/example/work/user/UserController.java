@@ -24,7 +24,15 @@ public class UserController {
     @PostMapping
     public void registerUser(@RequestBody User user){
         userService.addNewUser(user);
+    }
+    @DeleteMapping(path = "{userId}")
+    public void deleteUser(@PathVariable("userId") int userId){
+        userService.deleteUser(userId);
+    }
 
+    @PutMapping(path = "{userId}")
+    public void updateUser(@PathVariable("userId") int userId, @RequestParam(required = false) String username, @RequestParam(required = false) String email, @RequestParam(required = false) String password){
+        userService.updateUser(userId, username, email, password);
     }
 
 }
